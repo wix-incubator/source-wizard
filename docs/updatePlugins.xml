@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+  <plugin id="com.wixpress.source-wizard"
+          url="https://github.com/wix-incubator/source-wizard/releases/download/1.0/source-wizard-1.0.zip"
+          version="1.0">
+    <idea-version since-build="2021.1.2" />
+  </plugin>
+</plugins>

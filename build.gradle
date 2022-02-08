@@ -33,16 +33,13 @@ test {
 
 task prepareReleaseXml {
     doLast {
-         file("${projectDir}/docs/source-wizard.xml").text ="""<plugin-repository>
-    <Category name="Build">
-         <idea-plugin>
-            <id>com.wixpress.source-wizard</id>
-            <idea-version since-build="2021.1.2" />
-            <name>Source Wizard</name>
-            <version>${version}</version>
-            <download-url>https://github.com/wix-incubator/source-wizard/releases/download/${version}/source-wizard-${version}.zip</download-url>
-        </idea-plugin>
-    </Category>
-</plugin-repository>"""
+         file("${projectDir}/docs/updatePlugins.xml").text ="""<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+  <plugin id="com.wixpress.source-wizard"
+          url="https://github.com/wix-incubator/source-wizard/releases/download/$version/source-wizard-${version}.zip"
+          version="$version">
+    <idea-version since-build="2021.1.2" />
+  </plugin>
+</plugins>"""
     }
 }
