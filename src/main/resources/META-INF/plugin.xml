@@ -1,0 +1,49 @@
+<idea-plugin>
+    <id>com.wixpress.source-wizard</id>
+    <name>Source Wizard</name>
+    <vendor email="tadaso@wix.com" url="wix.com">Wix</vendor>
+
+    <description>
+       Source Wizard is a plugin to access sources of your node_module dependencies.
+
+        It caches sources of npm modules in your local directory `~/.npm-src` where they can be easily
+        accessed from your project.
+
+        When opening a file from `node_modules`, if source file is cached, pop up appears
+        with the suggestion to open source file. When file is not found in the local cache, pop up to download
+        and cache sources to your machine appears.
+    </description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Source Wizard Notification Group" displayType="TOOL_WINDOW"/>
+        <projectService serviceInterface="repository.RepositoryService"
+                        serviceImplementation="repository.impl.GitRepositoryService"/>
+        <projectService serviceImplementation="infra.GitClient"/>
+        <projectService serviceImplementation="npmmodules.NpmModuleFileExaminer"/>
+        <projectService serviceImplementation="infra.ProcessBuilderProvider"/>
+        <projectService serviceInterface="files.FileFinderService"
+                        serviceImplementation="files.impl.FilenameIndexFileFinderService"/>
+        <projectService serviceInterface="files.SourcesFinderService"
+                        serviceImplementation="files.impl.IndexedSourcesFinderService"/>
+        <projectService serviceInterface="files.AttachDirectorySourcesProvider"
+                        serviceImplementation="files.impl.AttachSymbolicLinkDirectorySourcesProvider"/>
+        <projectService serviceImplementation="infra.RepositoryProgressManagerService"/>
+        <indexedRootsProvider implementation="plugin.extensions.IndexableNpmSourcesContributor"/>
+        <additionalLibraryRootsProvider implementation="plugin.extensions.NpmSourcesLibraryRootProvider"/>
+    </extensions>
+
+    <actions>
+        <action id="plugin.actions.DownloadSourcesAction" class="plugin.actions.DownloadSourcesAction"/>
+        <action id="plugin.actions.SymlinkExistingSourcesAction" class="plugin.actions.SymlinkExistingSourcesAction"/>
+    </actions>
+
+    <projectListeners>
+        <listener class="plugin.extensions.NpmModuleFileActionListener"
+                  topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
+
+</idea-plugin>

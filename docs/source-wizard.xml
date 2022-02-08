@@ -1,0 +1,11 @@
+<plugin-repository>
+    <Category name="Build">
+         <idea-plugin>
+            <id>com.wixpress.source-wizard</id>
+            <idea-version since-build="2021.1.2" />
+            <name>Source Wizard</name>
+            <version>1.0</version>
+            <download-url>https://github.com/wix-incubator/source-wizard/releases/1.0/source-wizard.zip</download-url>
+        </idea-plugin>
+    </Category>
+</plugin-repository>
