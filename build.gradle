@@ -31,14 +31,6 @@ test {
     useJUnitPlatform()
 }
 
-task prepareReleaseJar(type: Copy) {
-        from("${projectDir}/build/distributions/source-wizard-${version}.zip")
-
-        into("${projectDir}/releases/${version}")
-
-        rename("source-wizard-${version}.zip", 'source-wizard.zip')
-}
-
 task prepareReleaseXml {
     doLast {
          file("${projectDir}/docs/source-wizard.xml").text ="""<plugin-repository>
@@ -48,7 +40,7 @@ task prepareReleaseXml {
             <idea-version since-build="2021.1.2" />
             <name>Source Wizard</name>
             <version>${version}</version>
-            <download-url>https://github.com/wix-incubator/source-wizard/releases/${version}/source-wizard.zip</download-url>
+            <download-url>https://github.com/wix-incubator/source-wizard/releases/download/${version}/source-wizard-${version}.zip</download-url>
         </idea-plugin>
     </Category>
 </plugin-repository>"""
