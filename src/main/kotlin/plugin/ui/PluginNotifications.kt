@@ -38,7 +38,7 @@ object PluginNotifications {
             "Download sources for $fileName file.",
             NotificationType.INFORMATION,
         )
-        notification.addActions(mutableListOf(DownloadSourcesAction(), SymlinkExistingSourcesAction()))
+        notification.addAction(DownloadSourcesAction()).addAction(SymlinkExistingSourcesAction())
         Notifications.Bus.notify(notification, project)
     }
 
