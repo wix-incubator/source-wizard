@@ -40,7 +40,7 @@ task prepareReleaseXml {
             <name>Source Wizard</name>
             <version>$version</version>
             <idea-version since-build='203.0' until-build='213.*' />
-            <download-url>https://github.com/wix-incubator/source-wizard/releases/download/$version/source-wizard-$version.zip</download-url>
+            <download-url>https://github.com/wix-incubator/source-wizard/releases/download/$version/source-wizard-${version}.zip</download-url>
         </idea-plugin>
     </category>
 </plugin-repository>"""
