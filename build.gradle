@@ -24,6 +24,7 @@ dependencies {
 intellij {
     pluginName = 'source-wizard'
     type = 'IU'
+    version = '2021.3.2'
 }
 
 test {
@@ -32,13 +33,16 @@ test {
 
 task prepareReleaseXml {
     doLast {
-         file("${projectDir}/docs/updatePlugins.xml").text ="""<?xml version="1.0" encoding="UTF-8"?>
-<plugins>
-  <plugin id="com.wixpress.source-wizard"
-          url="https://github.com/wix-incubator/source-wizard/releases/download/$version/source-wizard-${version}.zip"
-          version="$version">
-    <idea-version since-build="2021.1.2" />
-  </plugin>
-</plugins>"""
+         file("${projectDir}/docs/updatePlugins.xml").text ="""<plugin-repository>
+    <category name='GA'>
+        <idea-plugin>
+            <id>com.wixpress.source-wizard</id>
+            <name>Source Wizard</name>
+            <version>$version</version>
+            <idea-version since-build='203.0' until-build='213.*' />
+            <download-url>https://github.com/wix-incubator/source-wizard/releases/download/$version/source-wizard-$version.zip</download-url>
+        </idea-plugin>
+    </category>
+</plugin-repository>"""
     }
 }
