@@ -28,7 +28,7 @@ class NpmSourcesSyntheticLibrary(private val libraryRootDirectory: VirtualFile) 
 
     override fun getIcon(unused: Boolean): Icon? = null
 
-    override fun getSourceRoots(): Collection<VirtualFile> = libraryRootDirectory.children.toList()
+    override fun getSourceRoots(): Collection<VirtualFile> = listOf(libraryRootDirectory)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
