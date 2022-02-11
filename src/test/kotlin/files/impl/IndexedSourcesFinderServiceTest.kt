@@ -8,7 +8,7 @@ import com.intellij.openapi.vfs.VirtualFileSystem
 import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile
 import files.FileFinderService
 import infra.MissingRepositoryUrlException
-import infra.RepositoryProgressManagerService
+import infra.PluginRepositoryManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -23,7 +23,7 @@ internal class IndexedSourcesFinderServiceTest {
     private val fileDirectory: VirtualFile
     private val file: VirtualFile
     private val fileSource: VirtualFile
-    private val repositoryProgressManagerService: RepositoryProgressManagerService
+    private val pluginRepositoryManager: PluginRepositoryManager
     private val fileFinderService: FileFinderService
     private val npmModuleFileExaminer: NpmModuleFileExaminer
     private val project: Project
@@ -38,11 +38,11 @@ internal class IndexedSourcesFinderServiceTest {
         fileDirectory = FakeVirtualFile(mockFile, "directory")
         file = FakeVirtualFile(fileDirectory, "file.ts")
         fileSource = FakeVirtualFile(fileDirectory, "file-source.ts")
-        repositoryProgressManagerService = mockk()
+        pluginRepositoryManager = mockk()
         fileFinderService = mockk()
         npmModuleFileExaminer = mockk()
         project = mockProject()
-            .withService(RepositoryProgressManagerService::class.java, repositoryProgressManagerService)
+            .withService(PluginRepositoryManager::class.java, pluginRepositoryManager)
             .withService(FileFinderService::class.java, fileFinderService)
             .withService(NpmModuleFileExaminer::class.java, npmModuleFileExaminer)
 
@@ -55,7 +55,7 @@ internal class IndexedSourcesFinderServiceTest {
         every { npmModuleFileExaminer.extractNpmModuleDirectory(any()) } returns npmModuleDirectory
         every { npmModuleFileExaminer.extractRepositoryUrl(any()) } returns repositoryUrl
         every { fileFinderService.findFile(any(), any(), any(), any()) } returns listOf(fileSource)
-        every { repositoryProgressManagerService.pullRepositoryAsync(any()) } returns Unit
+        every { pluginRepositoryManager.pullRepositoryAsync(any()) } returns Unit
 
         val result = indexedSourcesFinderService.find(project, file)
 
@@ -63,7 +63,7 @@ internal class IndexedSourcesFinderServiceTest {
         verify { npmModuleFileExaminer.extractNpmModuleDirectory(file) }
         verify { npmModuleFileExaminer.extractRepositoryUrl(file) }
         verify { fileFinderService.findFile(project, "module", "file.ts", "directory") }
-        verify { repositoryProgressManagerService.pullRepositoryAsync(repositoryUrl) }
+        verify { pluginRepositoryManager.pullRepositoryAsync(repositoryUrl) }
     }
 
     @Test
@@ -74,7 +74,7 @@ internal class IndexedSourcesFinderServiceTest {
         val result = indexedSourcesFinderService.find(project, file)
 
         assertEquals(0, result.size)
-        verify(exactly = 0) { repositoryProgressManagerService.pullRepositoryAsync(any()) }
+        verify(exactly = 0) { pluginRepositoryManager.pullRepositoryAsync(any()) }
     }
 
     @Test
@@ -83,7 +83,7 @@ internal class IndexedSourcesFinderServiceTest {
         every { npmModuleFileExaminer.extractNpmModuleDirectory(any()) } returns npmModuleDirectory
         every { npmModuleFileExaminer.extractRepositoryUrl(any()) } returns repositoryUrl
         every { fileFinderService.findFile(any(), any(), any(), any()) } returns listOf(fileSource)
-        every { repositoryProgressManagerService.cloneRepositorySync(any()) } returns Unit
+        every { pluginRepositoryManager.cloneRepositorySync(any()) } returns Unit
 
         val result = indexedSourcesFinderService.downloadRepositoryAndFind(project, file)
 
@@ -91,7 +91,7 @@ internal class IndexedSourcesFinderServiceTest {
         verify { npmModuleFileExaminer.extractNpmModuleDirectory(file) }
         verify { npmModuleFileExaminer.extractRepositoryUrl(file) }
         verify { fileFinderService.findFile(project, "module", "file.ts", "directory") }
-        verify { repositoryProgressManagerService.cloneRepositorySync(repositoryUrl) }
+        verify { pluginRepositoryManager.cloneRepositorySync(repositoryUrl) }
     }
 
     @Test

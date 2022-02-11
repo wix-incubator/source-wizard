@@ -22,16 +22,12 @@ class GitClient(project: Project) {
     }
 
     fun pull(repositoryUrl: String, repositoryPath: String) {
-        val pullResult = processBuilderProvider
+        processBuilderProvider
             .getProcessBuilder()
             .command("git", "pull", repositoryUrl)
             .redirectOutput(ProcessBuilder.Redirect.INHERIT)
             .redirectError(ProcessBuilder.Redirect.INHERIT)
             .directory(File(repositoryPath))
             .start().waitFor()
-
-        if (pullResult != 0) {
-            throw GitOperationException("Failed to pull repository $repositoryUrl")
-        }
     }
 }

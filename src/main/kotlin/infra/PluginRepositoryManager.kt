@@ -9,7 +9,7 @@ import com.intellij.openapi.project.Project
 import plugin.ui.PluginNotifications
 import repository.RepositoryService
 
-class RepositoryProgressManagerService(val project: Project) {
+class PluginRepositoryManager(val project: Project) {
 
     private val repositoryService: RepositoryService = project.service()
 
@@ -31,6 +31,5 @@ class RepositoryProgressManagerService(val project: Project) {
                 root.refresh(false, true)
                 repositoryPath
             }, "Downloading sources", false, project)
-        PluginNotifications.notifyAboutDownloadedRepository(project)
     }
 }

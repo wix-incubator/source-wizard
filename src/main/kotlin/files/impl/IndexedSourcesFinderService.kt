@@ -5,13 +5,13 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import files.FileFinderService
 import files.SourcesFinderService
-import npmmodules.NpmModuleFileExaminer
 import infra.MissingRepositoryUrlException
-import infra.RepositoryProgressManagerService
+import infra.PluginRepositoryManager
+import npmmodules.NpmModuleFileExaminer
 
 class IndexedSourcesFinderService(project: Project) : SourcesFinderService {
 
-    private val repositoryProgressManagerService = project.service<RepositoryProgressManagerService>()
+    private val pluginRepositoryManager = project.service<PluginRepositoryManager>()
     private val fileFinderService = project.service<FileFinderService>()
     private val npmModuleFileExaminer = project.service<NpmModuleFileExaminer>()
 
@@ -23,7 +23,7 @@ class IndexedSourcesFinderService(project: Project) : SourcesFinderService {
         if (sourceFiles.isNotEmpty()) {
             val repositoryUrl = npmModuleFileExaminer.extractRepositoryUrl(file)
             repositoryUrl?.let {
-                repositoryProgressManagerService.pullRepositoryAsync(repositoryUrl)
+                pluginRepositoryManager.pullRepositoryAsync(repositoryUrl)
             }
         }
         return sourceFiles
@@ -31,7 +31,7 @@ class IndexedSourcesFinderService(project: Project) : SourcesFinderService {
 
     override fun downloadRepositoryAndFind(project: Project, file: VirtualFile): List<VirtualFile> {
         val repositoryUrl = npmModuleFileExaminer.extractRepositoryUrl(file) ?: throw MissingRepositoryUrlException()
-        repositoryProgressManagerService.cloneRepositorySync(repositoryUrl)
+        pluginRepositoryManager.cloneRepositorySync(repositoryUrl)
 
         val npmModule = npmModuleFileExaminer.extractNpmModuleDirectory(file)
         return findSourceFiles(project, npmModule, file)

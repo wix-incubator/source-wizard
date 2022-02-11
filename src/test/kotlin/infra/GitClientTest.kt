@@ -55,13 +55,4 @@ internal class GitClientTest {
         verify { process.waitFor() }
     }
 
-    @Test
-    fun `pull should throw exception when process returns anything than 0`() {
-        every { processBuilderProvider.getProcessBuilder() } returns processBuilder
-        every { processBuilder.start() } returns process
-        every { process.waitFor() } returns 1
-
-        assertThrows<GitOperationException> { gitClient.pull(repositoryUrl, repositoryPath) }
-    }
-
 }
