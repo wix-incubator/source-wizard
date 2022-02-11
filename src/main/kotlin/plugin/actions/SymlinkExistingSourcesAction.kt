@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.service
 import com.intellij.openapi.fileChooser.FileChooser
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.FileUtil
@@ -13,6 +12,8 @@ import com.intellij.openapi.vfs.VfsUtil
 import files.AttachDirectorySourcesProvider
 import files.SourcesFinderService
 import files.SourcesResultHandler
+import infra.PluginUtils.metadata
+import infra.SourceCacheDirectory
 import infra.SourceCacheDirectory.getPathToSourceCacheDirectory
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -21,7 +22,7 @@ import java.nio.file.Paths
 class SymlinkExistingSourcesAction :
     AnAction("Attach Sources Directory", "Attach directory with the sources from your computer", null) {
     override fun actionPerformed(e: AnActionEvent) {
-        val project = e.project!!
+        val (project, source, openedFile) = e.metadata()
 
         val sourcePathDirectory = chooseDirectoryToLink(project)
         createLink(project, sourcePathDirectory)

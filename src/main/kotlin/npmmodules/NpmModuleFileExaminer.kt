@@ -33,4 +33,12 @@ class NpmModuleFileExaminer {
             else -> extractNpmModuleDirectory(file.parent)
         }
     }
+
+    fun extractNpmModuleName(file: VirtualFile): String {
+        return when {
+            file.children.any { it.name == "package.json" } -> file.name
+            file.name == "node_modules" -> ""
+            else -> extractNpmModuleName(file.parent)
+        }
+    }
 }

@@ -1,7 +1,5 @@
 package plugin.ui
 
-import plugin.actions.DownloadSourcesAction
-import plugin.actions.SymlinkExistingSourcesAction
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationType
@@ -10,8 +8,13 @@ import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import files.SourcesResultHandler
+import npmmodules.NpmModuleFileExaminer
+import plugin.actions.DownloadSourcesAction
+import plugin.actions.SymlinkExistingSourcesAction
 
 object PluginNotifications {
+
+    private val npmModuleFileExaminer: NpmModuleFileExaminer by lazy { NpmModuleFileExaminer() }
 
     fun notifyAboutAvailableSources(
         project: Project,
@@ -22,7 +25,8 @@ object PluginNotifications {
         val notification = Notification(
             "Source Wizard Notification Group",
             "Sources available",
-            "Source file available for ${initialFile.parent.name}/${initialFile.name}.",
+            "Source file available for ${npmModuleFileExaminer.extractNpmModuleName(initialFile)}/" +
+                    "${initialFile.parent.name}/${initialFile.name}.",
             NotificationType.INFORMATION,
         )
         notification.addAction(NotificationAction.create("Open Sources") { _ ->
@@ -31,11 +35,11 @@ object PluginNotifications {
         Notifications.Bus.notify(notification, project)
     }
 
-    fun notifyAboutSourcesAvailableToDownload(project: Project, fileName: String) {
+    fun notifyAboutSourcesAvailableToDownload(project: Project, initialFile: VirtualFile) {
         val notification = Notification(
             "Source Wizard Notification Group",
             "Sources available",
-            "Download sources for $fileName file.",
+            "Download sources for ${npmModuleFileExaminer.extractNpmModuleName(initialFile)}/${initialFile.name} file.",
             NotificationType.INFORMATION,
         )
         notification.addAction(DownloadSourcesAction()).addAction(SymlinkExistingSourcesAction())
@@ -47,6 +51,16 @@ object PluginNotifications {
             "Source Wizard Notification Group",
             "Sources downloaded",
             "Poof! Repository with sources downloaded.",
+            NotificationType.INFORMATION,
+        )
+        Notifications.Bus.notify(notification, project)
+    }
+
+    fun notifyAboutAddedSources(project: Project) {
+        val notification = Notification(
+            "Source Wizard Notification Group",
+            "Source repository added successfully",
+            "Your file will be opened after indexing is finished",
             NotificationType.INFORMATION,
         )
         Notifications.Bus.notify(notification, project)

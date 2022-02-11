@@ -27,7 +27,7 @@ class NpmModuleFileActionListener : FileEditorManagerListener {
             if (sourceFiles.isNotEmpty()) {
                 PluginNotifications.notifyAboutAvailableSources(project, source, openedFile, sourceFiles)
             } else {
-                PluginNotifications.notifyAboutSourcesAvailableToDownload(project, openedFile.name)
+                PluginNotifications.notifyAboutSourcesAvailableToDownload(project, openedFile)
             }
         }
     }

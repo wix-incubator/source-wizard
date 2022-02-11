@@ -4,14 +4,11 @@
     <vendor email="tadaso@wix.com" url="wix.com">Wix</vendor>
 
     <description>
-       Source Wizard is a plugin to access sources of your node_module dependencies.
+        Plugin website: https://github.com/wix-incubator/source-wizard
+        Source Wizard is a plugin to access sources of your node_module dependencies.
 
         It caches sources of npm modules in your local directory `~/.npm-src` where they can be easily
         accessed from your project.
-
-        When opening a file from `node_modules`, if source file is cached, pop up appears
-        with the suggestion to open source file. When file is not found in the local cache, pop up to download
-        and cache sources to your machine appears.
     </description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -31,7 +28,7 @@
                         serviceImplementation="files.impl.IndexedSourcesFinderService"/>
         <projectService serviceInterface="files.AttachDirectorySourcesProvider"
                         serviceImplementation="files.impl.AttachSymbolicLinkDirectorySourcesProvider"/>
-        <projectService serviceImplementation="infra.RepositoryProgressManagerService"/>
+        <projectService serviceImplementation="infra.PluginRepositoryManager"/>
         <indexedRootsProvider implementation="plugin.extensions.IndexableNpmSourcesContributor"/>
         <additionalLibraryRootsProvider implementation="plugin.extensions.NpmSourcesLibraryRootProvider"/>
     </extensions>
