@@ -29,6 +29,7 @@
         <projectService serviceInterface="files.AttachDirectorySourcesProvider"
                         serviceImplementation="files.impl.AttachSymbolicLinkDirectorySourcesProvider"/>
         <projectService serviceImplementation="infra.PluginRepositoryManager"/>
+        <projectService serviceImplementation="files.ProjectStateAwareFileOpener"/>
         <indexedRootsProvider implementation="plugin.extensions.IndexableNpmSourcesContributor"/>
         <additionalLibraryRootsProvider implementation="plugin.extensions.NpmSourcesLibraryRootProvider"/>
     </extensions>
