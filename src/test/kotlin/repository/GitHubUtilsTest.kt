@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test
 
 
 class GitHubUtilsTest {
-    private val httpsUrl  = "https://github.com/wix-private/wix-node-platform.git"
-    private val sshUrl = "git@github.com:wix-private/wix-node-platform.git"
+    private val httpsUrl  = "https://github.com/expressjs/express.git"
+    private val sshUrl = "git@github.com:expressjs/express.git"
 
 
     @Test
