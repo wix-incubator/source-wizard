@@ -5,7 +5,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.AdditionalLibraryRootsProvider
 import com.intellij.openapi.roots.SyntheticLibrary
 import com.intellij.openapi.vfs.VirtualFile
-import infra.SourceCacheDirectory
+import sourcecache.SourceCacheDirectory
 import javax.swing.Icon
 
 class NpmSourcesLibraryRootProvider : AdditionalLibraryRootsProvider() {

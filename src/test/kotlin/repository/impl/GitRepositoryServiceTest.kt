@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import repository.GitHubUtils
 import repository.GitHubUtils.convertToSshUrl
-import infra.SourceCacheDirectory.getPathToSourceCacheDirectory
+import sourcecache.SourceCacheDirectory.getPathToSourceCacheDirectory
 import infra.GitClient
 
 internal class GitRepositoryServiceTest {

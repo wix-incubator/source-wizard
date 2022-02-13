@@ -10,9 +10,9 @@ import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VfsUtil
 import files.AttachDirectorySourcesProvider
 import files.ProjectStateAwareFileOpener
-import infra.PluginUtils.executeBackgroundTask
-import infra.PluginUtils.metadata
-import infra.SourceCacheDirectory.getPathToSourceCacheDirectory
+import plugin.PluginUtils.executeBackgroundTask
+import plugin.PluginUtils.metadata
+import sourcecache.SourceCacheDirectory.getPathToSourceCacheDirectory
 import java.nio.file.Path
 import java.nio.file.Paths
 

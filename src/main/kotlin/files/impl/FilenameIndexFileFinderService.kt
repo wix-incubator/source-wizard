@@ -6,7 +6,7 @@ import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.GlobalSearchScopesCore
 import files.FileFinderService
-import infra.SourceCacheDirectory.getSourceCacheDirectoryFile
+import sourcecache.SourceCacheDirectory.getSourceCacheDirectoryFile
 
 
 class FilenameIndexFileFinderService : FileFinderService {

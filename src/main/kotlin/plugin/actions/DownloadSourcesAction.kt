@@ -4,11 +4,11 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.service
 import files.ProjectStateAwareFileOpener
-import infra.InternalPluginException
+import infra.FailedToFindSourceRepositoryException
 import infra.MissingRepositoryUrlException
-import infra.PluginUtils.executeBackgroundTask
-import infra.PluginUtils.metadata
 import npmmodules.NpmModuleFileExaminer
+import plugin.PluginUtils.executeBackgroundTask
+import plugin.PluginUtils.metadata
 import plugin.ui.PluginNotifications
 import repository.RepositoryService
 
@@ -37,7 +37,9 @@ class DownloadSourcesAction :
     private fun withHandledErrors(runnable: Runnable) {
         try {
             runnable.run()
-        } catch (error: InternalPluginException) {
+        } catch (error: MissingRepositoryUrlException) {
+            PluginNotifications.notifyAboutMissingRepositoryUrl()
+        } catch (error: FailedToFindSourceRepositoryException) {
             PluginNotifications.notifyAboutMissingRepository()
         } catch (error: Exception) {
             PluginNotifications.notifyAboutFailure()

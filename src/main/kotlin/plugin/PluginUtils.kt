@@ -1,4 +1,4 @@
-package infra
+package plugin
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileEditor.FileEditorManager

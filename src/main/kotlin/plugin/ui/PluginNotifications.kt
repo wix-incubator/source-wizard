@@ -46,16 +46,6 @@ object PluginNotifications {
         Notifications.Bus.notify(notification, project)
     }
 
-    fun notifyAboutDownloadedRepository(project: Project) {
-        val notification = Notification(
-            "Source Wizard Notification Group",
-            "Sources downloaded",
-            "Poof! Repository with sources downloaded.",
-            NotificationType.INFORMATION,
-        )
-        Notifications.Bus.notify(notification, project)
-    }
-
     fun notifyAboutAddedSources(project: Project) {
         val notification = Notification(
             "Source Wizard Notification Group",
@@ -75,11 +65,20 @@ object PluginNotifications {
         )
     )
 
-    fun notifyAboutMissingRepository() = Notifications.Bus.notify(
+    fun notifyAboutMissingRepositoryUrl() = Notifications.Bus.notify(
         Notification(
             "Source Wizard Notification Group",
             "Sources wizard",
             "Sources failed to download. No repository url in package.json file",
+            NotificationType.ERROR,
+        )
+    )
+
+    fun notifyAboutMissingRepository() = Notifications.Bus.notify(
+        Notification(
+            "Source Wizard Notification Group",
+            "Sources wizard",
+            "Sources failed to download. Could not find source files repository",
             NotificationType.ERROR,
         )
     )

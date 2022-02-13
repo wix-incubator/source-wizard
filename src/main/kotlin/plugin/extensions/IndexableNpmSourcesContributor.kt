@@ -2,7 +2,7 @@ package plugin.extensions
 
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.indexing.IndexableSetContributor
-import infra.SourceCacheDirectory
+import sourcecache.SourceCacheDirectory
 
 class IndexableNpmSourcesContributor : IndexableSetContributor() {
     override fun getAdditionalRootsToIndex(): MutableSet<VirtualFile> {

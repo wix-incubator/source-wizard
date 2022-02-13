@@ -21,7 +21,7 @@ class NpmModuleFileExaminer {
 
         val definitelyTypedUtils = DefinitelyTypedUtils()
         return if (definitelyTypedUtils.isDefinitelyTypedModule(repositoryUrl)) {
-            val npmModuleName = extractNpmModuleDirectory(file).name
+            val npmModuleName = npmModule.name
             definitelyTypedUtils.findActualRepositoryUrl(npmModuleName)
         } else repositoryUrl
     }

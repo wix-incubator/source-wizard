@@ -3,7 +3,7 @@ package plugin.ui
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.ui.popup.*
 import com.intellij.openapi.vfs.VirtualFile
-import infra.SourceCacheDirectory.sourceCacheDirectoryName
+import sourcecache.SourceCacheDirectory.sourceCacheDirectoryName
 import javax.swing.Icon
 
 class FileListPopup(

@@ -3,7 +3,7 @@ package repository.impl
 import com.intellij.openapi.project.Project
 import repository.GitHubUtils
 import repository.RepositoryService
-import infra.SourceCacheDirectory.getPathToSourceCacheDirectory
+import sourcecache.SourceCacheDirectory.getPathToSourceCacheDirectory
 import infra.GitClient
 
 

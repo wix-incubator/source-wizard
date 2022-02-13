@@ -1,4 +1,4 @@
-package infra
+package sourcecache
 
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VfsUtil
