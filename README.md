@@ -38,13 +38,13 @@ source file, therefore cache is always up-to-date with the state of git reposito
 Plugin uses SSH connection for git so please be sure you have correct SSH key set up if you want to access sources
 of private repositories.
 
->Be aware that npm modules sources are resolved from `repository.json` field in its package json file:
+Be aware that npm modules sources are resolved from `repository.json` field in its package json file:
 ```json
  "repository": {
     "url": "https://github.com/repository"
   }
 ```
->Plugin will not be able to download sources for modules not containing repository info in their package json files.**
+Plugin will not be able to download sources for modules not containing repository info in their package json files.
 
 #### DefinitelyTyped support
 Some npm modules are just type definitions without actual source code, for example **DefinitelyTyped** is 
