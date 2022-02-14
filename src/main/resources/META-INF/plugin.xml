@@ -1,14 +1,16 @@
-<idea-plugin>
+<idea-plugin url="https://github.com/wix-incubator/source-wizard">
     <id>com.wixpress.source-wizard</id>
     <name>Source Wizard</name>
     <vendor email="tadaso@wix.com" url="wix.com">Wix</vendor>
 
     <description>
-        Plugin website: https://github.com/wix-incubator/source-wizard
-        Source Wizard is a plugin to access sources of your node_module dependencies.
-
-        It caches sources of npm modules in your local directory `~/.npm-src` where they can be easily
-        accessed from your project.
+        <![CDATA[
+        Source Wizard is a plugin which helps you to access sources of your <em>node_module</em> dependencies
+        <ul>
+            <li>It allows you to cache sources of npm modules in your local directory with the ability to navigate to the sources when a file from <em>node_modules</em> is opened</li>
+            <li>Attaches source cache directory to project file tree view where you can explore the code of dependencies you use</li>
+        </ul>
+         ]]>
     </description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
