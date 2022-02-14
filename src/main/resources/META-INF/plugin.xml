@@ -5,6 +5,7 @@
 
     <description>
         <![CDATA[
+        <a href="https://github.com/wix-incubator/source-wizard">Plugin homepage</a>
         Source Wizard is a plugin which helps you to access sources of your <em>node_module</em> dependencies
         <ul>
             <li>It allows you to cache sources of npm modules in your local directory with the ability to navigate to the sources when a file from <em>node_modules</em> is opened</li>
